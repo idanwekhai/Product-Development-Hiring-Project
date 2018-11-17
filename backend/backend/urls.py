@@ -9,7 +9,8 @@ from risk_types import views as risk_type_views
 from field_types import views as field_type_views
 from fields_by_risk import views as fields_by_risk_views
 
-router = routers.DefaultRouter()
+# Create a router and register all viewsets
+router = DefaultRouter()
 router.register("risks", risk_views.RiskViewSet)
 router.register("fields", field_views.FieldViewSet)
 router.register("risk-types", risk_type_views.RiskTypeViewSet)
