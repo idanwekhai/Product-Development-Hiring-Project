@@ -42,6 +42,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'django_extensions',
+    'field_types',
+    'risk_types',
+    'risks',
+    'fields',
+    'fields_by_risk'
 
 ]
 
