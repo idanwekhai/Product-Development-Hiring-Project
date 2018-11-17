@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from rest_framwork import viewsets
 
-# Create your views here.
+from .models import Field
+from .serializer import FieldSerializer
+
+
+class FieldViewSet(viewsets.ModelViewSet):
+    """
+    A ViewSet for viewing, detailing and editing Fields.
+    """
+
+    query_set = Field.objects.all()
+    serializer_class = FieldSerializer

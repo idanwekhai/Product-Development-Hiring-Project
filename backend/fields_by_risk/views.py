@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from rest_framwork import viewsets
 
-# Create your views here.
+from .models import FieldByRisk
+from .serializer import FieldByRiskSerializer
+
+
+class FieldByRiskViewSet(viewsets.ModelViewSet):
+    """
+    A ViewSet for viewing, detailing and editing FieldByRisk.
+    """
+
+    query_set = FieldByRisk.objects.all()
+    serializer_class = FieldByRiskSerializer
