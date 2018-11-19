@@ -5,10 +5,10 @@ from risks.models import Risk
 
 
 class FieldByRisk(models.Model):
-	"""Defines the fields by risk"""
-	field = models.ForeignKey(Field, null=False, on_delete=models.CASCADE)
-	risk = models.ForeignKey(Risk, null=False, on_delete=models.CASCADE)
-	value = models.CharField(max_length=120, null=False)
+    """Defines the fields by risk"""
+    field = models.ForeignKey(Field, null=False, on_delete=models.CASCADE)
+    risk = models.ForeignKey(Risk, null=False, on_delete=models.CASCADE)
+    value = models.CharField(max_length=120, null=False)
 
-	def __str__(self):
-		return self.value
+    def __str__(self):
+        return self.value

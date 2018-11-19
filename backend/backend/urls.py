@@ -15,7 +15,7 @@ router.register("risks", risk_views.RiskViewSet)
 router.register("fields", field_views.FieldViewSet)
 router.register("risk-types", risk_type_views.RiskTypeViewSet)
 router.register("field-types", field_type_views.FieldTypeViewSet)
-router.register("fields_by_risk", fields_by_risk_views.FieldByRiskViewSet)
+router.register("fields-by-risk", fields_by_risk_views.FieldByRiskViewSet)
 
 urlpatterns = [
     path('api/v1/', include(router.urls)),
