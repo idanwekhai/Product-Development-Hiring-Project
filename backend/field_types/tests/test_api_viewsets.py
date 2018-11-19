@@ -19,8 +19,8 @@ def get_valid_object():
 
 def get_invalid_object():
     invalid_object = {
-        "name":"",
-        "description":""
+        "name": "",
+        "description": ""
     }
     return invalid_object
 

@@ -10,7 +10,6 @@ class RiskViewSet(viewsets.ModelViewSet):
     """
     A ViewSet for viewing, detailing and editing Risks.
     """
-
     queryset = Risk.objects.all()
     serializer_class = RiskSerializer
 
