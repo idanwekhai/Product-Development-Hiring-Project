@@ -15,7 +15,7 @@ client = Client()
 def get_valid_object():
     valid_object = {
         "field_type": FieldType.objects.create(name="field"),
-        "name": "Test Name",
+        "label": "Test Label",
         "description": "Test Description"
     }
     return valid_object
@@ -23,7 +23,7 @@ def get_valid_object():
 def get_invalid_object():
     invalid_object = {
         "field_type": "",
-        "name":"",
+        "label":"",
         "description":""
     }
     return invalid_object
@@ -82,7 +82,7 @@ class CreateNewField(TestCase):
     def setUp(self):
         self.valid_field = {
         "field_type": FieldType.objects.create(name="field").id,
-        "name": "Test Name",
+        "label": "Test Label",
         "description": "Test Description"
         }
         self.invalid_field = get_invalid_object()
@@ -112,7 +112,7 @@ class UpdateSingleField(TestCase):
 
         self.valid_field = {
         "field_type": FieldType.objects.create(name="field").id,
-        "name": "Test Name",
+        "label": "Test Label",
         "description": "Test Description"
         }
         self.invalid_field = get_invalid_object()
