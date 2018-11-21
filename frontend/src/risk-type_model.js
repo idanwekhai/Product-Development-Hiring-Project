@@ -30,13 +30,13 @@ $risktypes.$createRiskType = (payload) => {
     .then(response => response.data)
 }
 
-$risktypes.$updateRiskType = (payload, id) => {
-  return $risktypes.put(`risk-types/${id}`, payload)
+$risktypes.$updateRiskType = (id, payload) => {
+  return $risktypes.put(`risk-types/${id}/`, payload)
     .then(response => response.data)
 }
 
 $risktypes.$deleteRiskType = (id) => {
-  return $risktypes.delete(`risk-types/${id}`)
+  return $risktypes.delete(`risk-types/${id}/`)
     .then(response => response.data)
 }
 

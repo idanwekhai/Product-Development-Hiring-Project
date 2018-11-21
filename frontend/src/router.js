@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import vueResource from 'vue-resource'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 Vue.use(vueResource)
@@ -11,15 +10,20 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: () => import('./views/Home.vue')
+    },
+    {
+      path: '/risk-types',
+      name: 'risktypes',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('./views/ManageRiskTypes.vue')
     },
     {
       path: '/risks',
       name: 'risks',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/ManageRiskTypes.vue')
+      component: () => import('./views/ManageRisks.vue')
     }
   ]
 })

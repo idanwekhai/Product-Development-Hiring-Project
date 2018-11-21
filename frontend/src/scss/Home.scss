@@ -1,0 +1,97 @@
+@import "src/scss/_colors";
+
+.risk {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+
+  .risk--type-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+  }
+
+  .risk--content {
+    display: flex;
+    padding: 10px 10px;
+    margin-top: 30px;
+
+   .risk--content-fields {
+      display: flex;
+      flex-direction: row;
+      text-align: left;
+
+      .risk--action-new {
+        border: 0;
+        border-radius: 20px;
+        background-color: $primary;
+        color: #fff;
+        font-size: 1.5em;
+        &:active {
+          transform: translateY(2px);
+        }
+      }
+    }
+
+    .risk--content-header {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      font-size: .9em;
+      font-weight: bold;
+      background-color: $primary;
+      width: 100%;
+      color: #fff;
+    }
+
+    .risk--list {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      width: 100%;
+      border-left: 1px solid $default;
+      border-right: 1px solid $default;
+      border-bottom: 1px solid $default;
+      max-height: 60vh;
+      overflow-y: auto;
+
+      > li:nth-child(even) {
+        background: $grid-even-lines;
+      }
+
+      .icon-garbage {
+        fill: $cancel;
+        widows: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+      .icon-edit {
+        fill: $dark-default;
+        widows: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .button--save {
+      border: 0;
+      border-radius: 20px;
+      color: #fff;
+      background-color: $success;
+      padding: 10px 50px;
+      font-size: 1em;
+    }
+  }
+}
+
+.fields-by-risk-elements {
+  margin: 10px;
+}
