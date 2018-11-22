@@ -25,15 +25,8 @@ The database was made using MySQL to create a dynamic data model
 
 Here are a few frontend screens:
 
-- https://github.com/geovanecomp/BriteCore-Insurance-System/blob/master/docs/system/welcome_page.jpeg
-
-- https://github.com/geovanecomp/BriteCore-Insurance-System/blob/master/docs/system/risk_type_crud.jpeg
-
-- https://github.com/geovanecomp/BriteCore-Insurance-System/blob/master/docs/system/manage_risks.jpeg
-
-- https://github.com/geovanecomp/BriteCore-Insurance-System/blob/master/docs/system/main_screen.jpeg
-
-  
+- https://github.com/idanwekhai/Product-Development-Hiring-Project/blob/master/docs/screenshots/screenshot1.JPG
+- https://github.com/idanwekhai/Product-Development-Hiring-Project/blob/master/docs/screenshots/screenshot2.JPG
 
 ### Deployment***(mega bonus)**
 
@@ -51,6 +44,7 @@ Here are a few frontend screens:
 
    ```bash
    $ cd backend
+   $ pip install requirements.txt
    $ python manage.py syncdb
    ```
 
