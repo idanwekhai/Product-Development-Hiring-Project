@@ -12,10 +12,10 @@
 
       <component class="fields-by-risk-elements"
         v-for="(fieldByRisk, index) in fieldsByRisk" :key='index'
-        :is="mapFieldsId[fieldByRisk.field.id]"
-        :label="fieldByRisk.field.label"
-        v-model="fieldsByRisk[index].value"
-        :content="fieldsByRisk[index].value"
+        :is="mapFieldsId[fieldByRisk.id]"
+        :label="fieldByRisk.label"
+        v-model="fieldsByRisk.value"
+        :content="fieldsByRisk.value"
       >
       </component>
     </div>
@@ -46,9 +46,7 @@ export default {
   },
   data () {
     return {
-      manageRiskTypeModel: null,
-      manageRiskModel: null,
-      riskModel: null,
+      errors: [],
       riskTypes: [],
       risks: [],
       fieldTypes: [],
@@ -69,19 +67,16 @@ export default {
     }
   },
   mounted () {
-    this.manageRiskModel = ManageRiskModel
-    this.manageRiskTypeModel = ManageRiskTypeModel
-    this.riskModel = RiskModel
     this.setContentType()
   },
   filters: {
-    fieldTypeFilter (term, fieldstypes) {
+    fieldTypeFilter (term, fieldtypes) {
       return fieldtypes.filter(item => item.id === term)[0].name
     }
   },
   watch: {
     'form.risk_type' (risktype) {
-      if (riskType) {
+      if (risktype) {
         this.setRisks(risktype)
       }
     },
@@ -96,7 +91,7 @@ export default {
       if (form) {
         let field = {
           fieldLabel: form.fieldLabel,
-          fieldType: orm.fieldType
+          fieldType: form.fieldType
         }
 
         this.fields.push(field)
@@ -108,24 +103,24 @@ export default {
       this.setAllFieldTypes()
     },
     setAllRiskTypes () {
-      this.$risktypes.$fectchRiskTypes()
-        .then(res => (this.riskTypes = res.data))
-        .catch(error => console.error(error))
+      this.$risktypes.$fetchRiskTypes()
+        .then(res => {this.riskTypes = res})
+        .catch(err => console.error(err))
     },
     setAllFieldTypes () {
-      this.$fieldtypes.fetchFieldTypes()
-        .then(res => (this.fieldTypes = res.data))
-        .catch(error => console.error(error))
+      this.$fieldtypes.$fetchFieldTypes()
+        .then(res => {this.fieldTypes = res})
+        .catch(err => console.error(err))
     },
-    setRisks (pRiskTypeId) {
-      this.$risks.fetchRisksByRiskType(pRiskTypeId)
-        .then(res => (this.risks = res.data))
-        .catch(error => console.error(error))
+    setRisks (id) {
+      this.$risks.$fetchRisksByRiskType(id)
+        .then(res => {this.risks = res})
+        .catch(err => console.error(err))
     },
-    setFieldsByRisk (pRiskId) {
-      this.riskModel.getFieldsByRisk(pRiskId)
-        .then(res => (this.fieldsByRisk = res.data))
-        .catch(error => console.error(error))
+    setFieldsByRisk (id) {
+      this.$fieldbyrisks.$fetchFieldByRisk(id)
+        .then(res => {this.fieldsByRisk = res})
+        .catch(err => console.error(err))
     }
   }
 }

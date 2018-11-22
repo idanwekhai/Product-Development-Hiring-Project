@@ -21,7 +21,7 @@ $fieldbyrisks.$fetchFieldType = (id) => {
 }
 
 $fieldbyrisks.$fetchFieldByRisk = (risk_id) => {
-  return $fieldtypes.get(`fields-by-risk/list-fields-by-risk`, {risk_id: risk_id})
+  return $fieldtypes.get(`fields-by-risk/list-fields-by-risk/`, {risk_id: risk_id})
     .then(response => response.data)
 }
 

@@ -25,10 +25,10 @@
         </li>
       </div>
       <div class="manage-risk--list">
-        <li v-for="(field, index) in fields" :key='index'>
+        <li v-for="(field, index) in fieldTypes" :key='index'>
           <ul class="row">
-            <li class="col-4">{{ field.fieldType | fieldTypeFilter(fieldTypes)}}</li>
-            <li class="col-6">{{ field.fieldLabel }}</li>
+            <li class="col-4">{{ field.name }}</li>
+            <li class="col-6">{{ field.description }}</li>
             <li class="col-2"><span @click="removeField(index)"><icon-garbage class="icon-garbage"/></span></li>
           </ul>
         </li>
@@ -59,6 +59,7 @@ export default {
       errors: [],
       riskTypes: [],
       risks: [],
+      fields: [],
       fieldTypes: [],
       form: {
         name: '',
@@ -71,11 +72,6 @@ export default {
   mounted () {
     this.setContentType()
   },
-  filters: {
-     fieldTypeFilter (term, fieldtype) {
-      return fieldtype.filter(item => item.id === term)[0].name
-    }
-  },
   methods: {
     cleanFields () {
         this.form.fieldType = ''
@@ -83,7 +79,7 @@ export default {
     },
     createNewFieldsByRisk (risk) {
     },
-    handleNewField (from) {
+    handleNewField (form) {
       if (form) {
         let field = {
           fieldLabel: form.fieldLabel,
@@ -105,7 +101,7 @@ export default {
     },
     setAllFieldTypes () {
         this.$fieldtypes.$fetchFieldTypes()
-          .then(res => {this.fieldTypes = res.data})
+          .then(res => {this.fieldTypes = res})
           .catch(err => console.log(err))
     },
 
