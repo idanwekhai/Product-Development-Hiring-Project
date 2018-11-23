@@ -3,6 +3,6 @@ from .models import FieldType
 
 
 class FieldTypeSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = FieldType
-		fields = '__all__'
+    class Meta:
+        model = FieldType
+        fields = '__all__'

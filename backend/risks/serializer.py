@@ -3,6 +3,6 @@ from .models import Risk
 
 
 class RiskSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = Risk
-		fields = '__all__'
+    class Meta:
+        model = Risk
+        fields = '__all__'

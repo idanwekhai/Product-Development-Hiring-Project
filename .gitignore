@@ -284,4 +284,5 @@ brite/media/
 
 .pytest_cache/
 
+.aws/
 

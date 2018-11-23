@@ -10,6 +10,7 @@ from ..serializer import FieldTypeSerializer
 
 client = Client()
 
+
 def get_valid_object():
     valid_object = {
         "name": "Test Name",
@@ -17,12 +18,14 @@ def get_valid_object():
     }
     return valid_object
 
+
 def get_invalid_object():
     invalid_object = {
         "name": "",
         "description": ""
     }
     return invalid_object
+
 
 class GetAllFieldTypes(TestCase):
     """Test to GET every field type from API"""
@@ -42,6 +45,7 @@ class GetAllFieldTypes(TestCase):
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+
 class GetSingleFieldTypes(TestCase):
     """Test to GET single field type from API"""
 
@@ -52,7 +56,7 @@ class GetSingleFieldTypes(TestCase):
     def test_get_valid_single_field_type(self):
 
         response = client.get(reverse(
-            "fieldtype-detail", 
+            "fieldtype-detail",
             kwargs={"pk": self.field_type1.pk}))
 
         # get data from database
@@ -65,7 +69,7 @@ class GetSingleFieldTypes(TestCase):
     def test_get_invalid_single_field_type(self):
         invalid_id = 450
         response = client.get(reverse(
-            "fieldtype-detail", 
+            "fieldtype-detail",
             kwargs={"pk": invalid_id}))
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
@@ -81,16 +85,16 @@ class CreateNewFieldTypes(TestCase):
     def test_create_valid_field_type(self):
 
         response = client.post(reverse("fieldtype-list"),
-            data=json.dumps(self.valid_field_type),
-            content_type="application/json")
+                               data=json.dumps(self.valid_field_type),
+                               content_type="application/json")
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_create_invalid_field_type(self):
-        
+
         response = client.post(reverse("fieldtype-list"),
-            data=json.dumps(self.invalid_field_type),
-            content_type="application/json")
+                               data=json.dumps(self.invalid_field_type),
+                               content_type="application/json")
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
@@ -107,7 +111,7 @@ class UpdateSingleFieldTypes(TestCase):
     def test_update_valid_field_type(self):
 
         response = client.put(reverse(
-            "fieldtype-detail", 
+            "fieldtype-detail",
             kwargs={"pk": self.field_type.pk}),
             data=json.dumps(self.valid_field_type),
             content_type="application/json")
@@ -116,7 +120,7 @@ class UpdateSingleFieldTypes(TestCase):
 
     def test_update_invalid_single_field_type(self):
         response = client.put(reverse(
-            "fieldtype-detail", 
+            "fieldtype-detail",
             kwargs={"pk": self.field_type.pk}),
             data=json.dumps(self.invalid_field_type),
             content_type="application/json")
@@ -133,7 +137,7 @@ class DeleteSingleFieldTypes(TestCase):
     def test_delete_valid_single_field_type(self):
 
         response = client.delete(reverse(
-            "fieldtype-detail", 
+            "fieldtype-detail",
             kwargs={"pk": self.field_type.pk}))
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -141,7 +145,7 @@ class DeleteSingleFieldTypes(TestCase):
     def test_delete_invalid_single_field_type(self):
         invalid_id = 450
         response = client.get(reverse(
-            "fieldtype-detail", 
+            "fieldtype-detail",
             kwargs={"pk": invalid_id}))
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

@@ -16,9 +16,12 @@ from ..models import FieldByRisk
 
 client = Client()
 
+
 def get_valid_object():
     field_type = FieldType.objects.create(name='Test Field Type')
-    field = Field.objects.create(label='Test Field', field_type=field_type, required=False)
+    field = Field.objects.create(label='Test Field',
+                                 field_type=field_type,
+                                 required=False)
 
     risk_type = RiskType.objects.create(name='Test Risk Type')
     risk = Risk.objects.create(name='Test Risk', risk_type=risk_type)
@@ -30,6 +33,7 @@ def get_valid_object():
 
     return valid_object
 
+
 def get_invalid_object():
     invalid_object = {
         'field': '',
@@ -37,6 +41,7 @@ def get_invalid_object():
     }
 
     return invalid_object
+
 
 class GetAllFieldsByRisk(TestCase):
     """ Test module for GET all fields by risk API """
@@ -59,7 +64,8 @@ class GetAllFieldsByRisk(TestCase):
         risk_id = 1
 
         # Get API response
-        response = client.get(reverse('fieldbyrisk-list-fields-by-risk'), {'risk_id': risk_id})
+        response = client.get(reverse('fieldbyrisk-list-fields-by-risk'),
+                              {'risk_id': risk_id})
 
         # get data from db
         fields_by_risk = FieldByRisk.objects.filter(risk_id=risk_id)
@@ -78,7 +84,8 @@ class GetSingleFieldByRiskTest(TestCase):
 
     def test_get_valid_single_field(self):
         response = client.get(
-            reverse('fieldbyrisk-detail',  kwargs={'pk': self.fields_by_risk.pk}))
+            reverse('fieldbyrisk-detail',
+                    kwargs={'pk': self.fields_by_risk.pk}))
 
         field = FieldByRisk.objects.get(pk=self.fields_by_risk.pk)
         serializer = FieldByRiskSerializer(field)
@@ -89,16 +96,19 @@ class GetSingleFieldByRiskTest(TestCase):
     def test_get_invalid_single_field(self):
         invalid_id = 999
         response = client.get(
-            reverse('fieldbyrisk-detail',  kwargs={'pk': invalid_id}))
+            reverse('fieldbyrisk-detail', kwargs={'pk': invalid_id}))
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
 
 class CreateNewFieldByRiskTest(TestCase):
     """ Test module for inserting a new field """
 
     def setUp(self):
         field_type = FieldType.objects.create(name='Test Field Type')
-        field = Field.objects.create(label='Test Field', field_type=field_type, required=False).id
+        field = Field.objects.create(label='Test Field',
+                                     field_type=field_type,
+                                     required=False).id
 
         risk_type = RiskType.objects.create(name='Test Risk Type')
         risk = Risk.objects.create(name='Test Risk', risk_type=risk_type).id
@@ -109,8 +119,8 @@ class CreateNewFieldByRiskTest(TestCase):
             'value': 'Test value'
         }
 
-        self.invalid_field =  get_invalid_object()
-    
+        self.invalid_field = get_invalid_object()
+
     def test_create_invalid_field(self):
         response = client.post(
             reverse('fieldbyrisk-list'),
@@ -128,7 +138,9 @@ class UpdateSingleFieldByRiskTest(TestCase):
         self.field_by_risk = FieldByRisk.objects.create(**get_valid_object())
 
         field_type = FieldType.objects.create(name='Test Field Type')
-        field = Field.objects.create(label='Test Field', field_type=field_type, required=False).id
+        field = Field.objects.create(label='Test Field',
+                                     field_type=field_type,
+                                     required=False).id
 
         risk_type = RiskType.objects.create(name='Test Risk Type')
         risk = Risk.objects.create(name='Test Risk', risk_type=risk_type).id
@@ -140,11 +152,12 @@ class UpdateSingleFieldByRiskTest(TestCase):
 
         }
 
-        self.invalid_field =  get_invalid_object()
+        self.invalid_field = get_invalid_object()
 
     def test_update_valid_field(self):
         response = client.put(
-            reverse('fieldbyrisk-detail', kwargs={'pk': self.field_by_risk.pk}),
+            reverse('fieldbyrisk-detail',
+                    kwargs={'pk': self.field_by_risk.pk}),
             data=json.dumps(self.valid_field),
             content_type='application/json'
         )
@@ -153,7 +166,8 @@ class UpdateSingleFieldByRiskTest(TestCase):
 
     def test_update_invalid_field(self):
         response = client.put(
-            reverse('fieldbyrisk-detail', kwargs={'pk': self.field_by_risk.pk}),
+            reverse('fieldbyrisk-detail',
+                    kwargs={'pk': self.field_by_risk.pk}),
             data=json.dumps(self.invalid_field),
             content_type='application/json'
         )
@@ -170,13 +184,15 @@ class DeleteSingleField(TestCase):
 
     def test_delete_valid_single_field(self):
         response = client.delete(
-            reverse('fieldbyrisk-detail',  kwargs={'pk': self.field1.pk}))
+            reverse('fieldbyrisk-detail',
+                    kwargs={'pk': self.field1.pk}))
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_delete_invalid_single_field(self):
         invalid_id = 999
         response = client.delete(
-            reverse('fieldbyrisk-detail',  kwargs={'pk': invalid_id}))
+            reverse('fieldbyrisk-detail',
+                    kwargs={'pk': invalid_id}))
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

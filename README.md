@@ -44,7 +44,7 @@ Here are a few frontend screens:
 
    ```bash
    $ cd backend
-   $ pip install requirements.txt
+   $ pip install -r requirements.txt
    $ python manage.py syncdb
    ```
 
