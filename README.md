@@ -8,14 +8,14 @@ The API was created using Django Rest Framework, and the frontend was made with 
 
 ### Data
 
-The database was made using MySQL to create a dynamic data model
+The database was made using MySQL to create a dynamic data model, the data base has five tables field_types, risk_types, fields, risks and fields_by_risk. So users can define both the risks types for their risks and also the field types for the corresponding fields in the database. 
 
 - https://github.com/idanwekhai/Product-Development-Hiring-Project/blob/master/docs/Model%20Diagram.JPG
 - https://github.com/idanwekhai/Product-Development-Hiring-Project/blob/master/docs/my_project_subsystem.png
 
 ### API
 
-- The API was built using the community best practices and TDD oriented, with that, the API was fully tested (around 50 tests!). The API was created using the framework Django 2.1.2 and python 3.6.
+- The API was built using the community best practices and TDD oriented, with that, the API was fully tested. The API was created using the framework Django 2.1.2 and python 3.6.
 
 ### Frontend
 
@@ -45,7 +45,7 @@ Here are a few frontend screens:
    ```bash
    $ cd backend
    $ pip install -r requirements.txt
-   $ python manage.py syncdb
+   $ python manage.py syncdata
    ```
 
 3. start the backend dev server
@@ -73,10 +73,10 @@ Here are a few frontend screens:
 
    4. Click on the Security credentials tab, and go down to Access Key, note down the `access_key_id`. `secret_access_key` is only visible when you are creating new user, so you need to note down both the access_key_id and secre_access_key at the time of user creation only. To generate a new access_key, click on the `create access key` button,.
 
-   5. Create a folder called `aws` at the root level of the project
+   5. Create a folder called `.aws` at the root level of the project
 
       ```bash
-      $ mkdir aws
+      $ mkdir .aws
       ```
 
    6. Now, create a file called credentials and store the aws_access_key_id and aws_secret_access_key. The other specifics like default_region can also be stored. Firstly, to get the access credentials, do the following
