@@ -130,7 +130,7 @@ Here are a few frontend screens:
 
    ## Link to Project
 
-   1. Just access: http://ec2-54-198-232-208.compute-1.amazonaws.com/
+   1. Just access: https://u6h0ovhgul.execute-api.us-east-2.amazonaws.com/dev/api/v1/
 
    
 
