@@ -61,7 +61,7 @@ Here are a few frontend screens:
    $ yarn serve
    ```
 
-5. Access `http://localhost:8080` to open the frontend or `http://localhost:8000` to open the API documentation.
+5. Access `http://localhost:8080` to open the frontend or `http://localhost:8000/api/v1` to open the API documentation.
 
    ## How to deploy project
 
