@@ -145,13 +145,6 @@ REST_FRAMEWORK = {
 if ENVIRONMENT == 'production':
     DEBUG = False
     SECRET_KEY = os.getenv('SECRET_KEY')
-    SESSION_COOKIE_SECURE = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_REDIRECT_EXEMPT = []
-    SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 FIXTURE_DIRS = (
@@ -161,3 +154,29 @@ FIXTURE_DIRS = (
    '/risk_types/fixtures/',
    '/fields_by_risk/fixtures/',
 )
+
+# Add
+AWS_QUERYSTRING_AUTH = False
+# The AWS region to connect to.
+AWS_REGION = "region"
+
+# The AWS access key to use.
+AWS_ACCESS_KEY_ID = "key"
+
+# The AWS secret access key to use.
+AWS_SECRET_ACCESS_KEY = "key"
+AWS_STORAGE_BUCKET_NAME = "name of bucket"
+
+DEFAULT_FILE_STORAGE = STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+AWS_S3_BUCKET_NAME_STATIC = AWS_STORAGE_BUCKET_NAME
+AWS_LOCATION = 'static'
+
+# These next two lines will serve the static files directly 
+# from the s3 bucket
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+#STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+STATIC_URL = 'http://{!s}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'staticfiles/'),
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
