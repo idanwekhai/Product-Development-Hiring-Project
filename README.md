@@ -126,6 +126,53 @@ Here are a few frontend screens:
       $ zappa deploy dev
       ```
 
+      make a database on AWS RDS and change the database settings in `settings.py`
+
+      ```
+      DATABASES = {
+          'default': {
+               'ENGINE': 'django.db.backends.mysql',
+               'NAME': 'name of database',
+               'USER': 'user of database',
+               'PASSWORD': 'password for database',
+               'HOST': 'host name for database',
+               'PORT': '3306'
+           }
+      }
+      ```
+
+      finally make another s3 bucket to server the static files and update `settings.py` again, add the required keys and bucket name
+
+      ```
+      ...........
+      
+      # Add
+      AWS_QUERYSTRING_AUTH = False
+      # The AWS region to connect to.
+      AWS_REGION = "region"
+      
+      # The AWS access key to use.
+      AWS_ACCESS_KEY_ID = "key"
+      
+      # The AWS secret access key to use.
+      AWS_SECRET_ACCESS_KEY = "key"
+      AWS_STORAGE_BUCKET_NAME = "name of bucket"
+      
+      DEFAULT_FILE_STORAGE = STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+      AWS_S3_BUCKET_NAME_STATIC = AWS_STORAGE_BUCKET_NAME
+      AWS_LOCATION = 'static'
+      
+      # These next two lines will serve the static files directly 
+      # from the s3 bucket
+      AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+      #STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+      STATIC_URL = 'http://{!s}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
+      STATICFILES_DIRS = (
+          os.path.join(BASE_DIR, 'staticfiles/'),
+      )
+      STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+      ```
+
       
 
    ## Link to Project
